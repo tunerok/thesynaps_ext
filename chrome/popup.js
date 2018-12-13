@@ -1,24 +1,33 @@
-
-
-
-
 var el = document.getElementById('btn_submit');
+var s = document.getElementById('smname');
+
 if(el){
   el.addEventListener('click', get_url);
 }
-*/
-var el2 = document.getElementById('btn_cancel');
-if(el2){
-  el2.addEventListener('click', disc);
+
+
+
+function out(current_url){
+ s.value = current_url;
 }
-*/
+
+
+
 
 function get_url(){
 
 	chrome.extension.sendMessage({ msg: "get_url" });
+	
+
 }
-*/
-function disc(){
-	chrome.extension.sendMessage({ msg: "dis" });
-}*/
+
+chrome.extension.onMessage.addListener(
+    function(request, sender, sendResponse){
+        if(request.msg == "out") out(request.res);
+		//if(request.msg == "dis") disconn_proxy();
+    }
+);
+
+
+
 
